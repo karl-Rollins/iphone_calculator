@@ -1,0 +1,111 @@
+html {
+  font-size: 62.5%;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: grid;
+  place-content: center;
+}
+
+main {
+  width: 480px;
+  height: 750px;
+  border-radius: 25px;
+  background-color: #000000;
+  margin: 0 auto;
+}
+
+.head {
+  display: flex;
+  justify-content: space-between;
+  padding: 2rem 5rem;
+}
+
+.time {
+  font-size: 1.5rem;
+  color: white;
+}
+
+.device {
+  display: flex;
+  gap: 1rem;
+}
+
+span i {
+  color: white;
+  font-size: 1.5rem;
+}
+
+.history {
+  margin-left: 4rem;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #171717;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.history i {
+  color: rgb(155, 150, 150);
+  font-size: 1.5rem;
+}
+
+.display {
+  padding: 0 4rem;
+  height: 200px;
+}
+
+.btns {
+  height: 450px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  gap: 0.5rem;
+  padding: 0 3rem;
+}
+
+.function {
+  background-color: #595959;
+  height: auto;
+  width: 100%;
+  border-radius: 50%;
+  color: white;
+  font-size: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.operator {
+  background-color: #ed8e0e;
+  height: auto;
+  width: 100%;
+  border-radius: 50%;
+  color: white;
+  font-size: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.num {
+  background-color: #2e2e2e;
+  height: auto;
+  width: 100%;
+  border-radius: 50%;
+  color: white;
+  font-size: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
