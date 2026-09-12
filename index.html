@@ -23,36 +23,40 @@
       <div class="history">
         <i class="fa-solid fa-clock-rotate-left"></i>
       </div>
-      <div class="display"></div>
+      <div id="display-screen" class="display"></div>
       <div class="btns">
         <button class="del function">
           <i class="fa-solid fa-delete-left"></i>
         </button>
-        <button class="reset function">AC</button>
-        <button class="percentage function">%</button>
-        <button class="div operator"><i class="fa-solid fa-divide"></i></button>
-        <button class="num">7</button>
-        <button class="num">8</button>
-        <button class="num">9</button>
-        <button class="multiply operator"><i class="fa-solid fa-x"></i></button>
-        <button class="num">4</button>
-        <button class="num">5</button>
-        <button class="num">6</button>
-        <button class="minus operator">
+        <button onclick="clearScreen()" id="reset" class="function">AC</button>
+        <button onclick="appendNumber('%')" class="function">%</button>
+        <button onclick="appendNumber('/')" class="operator">
+          <i class="fa-solid fa-divide"></i>
+        </button>
+        <button onclick="appendNumber('7')" class="num">7</button>
+        <button onclick="appendNumber('8')" class="num">8</button>
+        <button onclick="appendNumber('9')" class="num">9</button>
+        <button onclick="appendNumber('x')" class="operator">
+          <i class="fa-solid fa-x"></i>
+        </button>
+        <button onclick="appendNumber('4')" class="num">4</button>
+        <button onclick="appendNumber('5')" class="num">5</button>
+        <button onclick="appendNumber('6')" class="num">6</button>
+        <button onclick="appendNumber('-')" class="operator">
           <i class="fa-solid fa-minus"></i>
         </button>
-        <button class="num">1</button>
-        <button class="num">2</button>
-        <button class="num">3</button>
-        <button class="addition operator">
+        <button onclick="appendNumber('1')" class="num">1</button>
+        <button onclick="appendNumber('2')" class="num">2</button>
+        <button onclick="appendNumber('3')" class="num">3</button>
+        <button onclick="appendNumber('+')" class="operator">
           <i class="fa-solid fa-plus"></i>
         </button>
-        <button class="plusminus num">
+        <button id="plusminus" class="num">
           <i class="fa-solid fa-plus-minus"></i>
         </button>
-        <button class="num">0</button>
-        <button class="num">.</button>
-        <button class="equal operator">=</button>
+        <button onclick="appendNumber('0')" class="num">0</button>
+        <button onclick="appendNumber('.')" class="num">.</button>
+        <button id="equal" class="operator">=</button>
       </div>
     </main>
     <script src="script.js"></script>

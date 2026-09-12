@@ -61,8 +61,11 @@ span i {
 }
 
 .display {
-  padding: 0 4rem;
+  padding: 2rem 4rem;
   height: 200px;
+  color: white;
+  text-align: right;
+  font-size: 2rem;
 }
 
 .btns {
