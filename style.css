@@ -1,0 +1,128 @@
+:root {
+  --bg-main: #000000;
+  --bg-history: #171717;
+  --color-white: #ffffff;
+  --color-gray-light: #595959;
+  --color-gray-dark: #2e2e2e;
+  --color-gray-icon: rgb(155 150 150);
+  --color-orange: #ed8e0e;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: grid;
+  place-content: center;
+}
+
+main {
+  width: 480px;
+  height: fit-content;
+  border-radius: 50px;
+  background-color: var(--bg-main);
+  margin: 0 auto;
+  padding: 2rem 2rem;
+}
+
+.head {
+  display: flex;
+  justify-content: space-between;
+  padding: 2rem 5rem;
+}
+
+.history {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: var(--bg-history);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.history i {
+  color: var(--color-gray-icon);
+  font-size: 2.5rem;
+}
+
+.display {
+  padding: 2rem 4rem;
+  height: 200px;
+  color: var(--color-white);
+  text-align: right;
+  font-size: 2rem;
+}
+
+.btns {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  gap: 1.5rem;
+}
+
+.function {
+  background-color: var(--color-gray-light);
+  border-radius: 50%;
+  color: var(--color-white);
+  font-size: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.operator {
+  background-color: var(--color-orange);
+  border-radius: 50%;
+  color: var(--color-white);
+  font-size: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.num {
+  background-color: var(--color-gray-dark);
+  border-radius: 50%;
+  color: var(--color-white);
+  font-size: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+button {
+  aspect-ratio: 1 / 1;
+}
+
+@media (max-width: 480px) {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+  }
+
+  html {
+    font-size: 40%;
+  }
+
+  main {
+    width: 480px;
+    height: fit-content;
+    background-color: var(--bg-main);
+    padding: 2rem 2rem;
+  }
+}
