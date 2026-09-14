@@ -14,23 +14,23 @@ function clearScreen () {
 // Function to evaluate the expression
 function calculate () {
   try {
-    let expression = screen.innerText
+    const expression = screen.innerText
       .replace(/x/g, '*')
-      .replace(/÷/g, '/');
+      .replace(/÷/g, '/')
 
-    let result = eval(expression);
+    const result = eval(expression)
 
-    screen.innerText = result;
+    screen.innerText = result
   } catch (error) {
-    screen.innerText = 'Error';
+    screen.innerText = 'Error'
   }
 }
 
-document.getElementById('equal').addEventListener('click', calculate);
+document.getElementById('equal').addEventListener('click', calculate)
 
 // Function to delete last value
 function deleteNumber () {
-    screen.innerText = screen.innerText.slice(0, -1);
+  screen.innerText = screen.innerText.slice(0, -1)
 }
 
-document.getElementById('delete').addEventListener('click', deleteNumber);
+document.getElementById('delete').addEventListener('click', deleteNumber)
