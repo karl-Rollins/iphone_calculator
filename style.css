@@ -1,7 +1,7 @@
 :root {
-  --bg-main: #000000;
+  --bg-main: #000;
   --bg-history: #171717;
-  --color-white: #ffffff;
+  --color-white: #fff;
   --color-gray-light: #595959;
   --color-gray-dark: #2e2e2e;
   --color-gray-icon: rgb(155 150 150);
@@ -31,7 +31,7 @@ main {
   border-radius: 50px;
   background-color: var(--bg-main);
   margin: 0 auto;
-  padding: 2rem 2rem;
+  padding: 2rem;
 }
 
 .history {
