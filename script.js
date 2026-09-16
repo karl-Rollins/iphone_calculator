@@ -14,20 +14,34 @@ function clearScreen () {
 // Function to evaluate the expression
 function calculate () {
   try {
-    const expression = screen.innerText
+    let expression = screen.innerText
       .replace(/x/g, '*')
       .replace(/÷/g, '/')
       // Replace percentages: "50%" → "(50/100)"
       .replace(/(\d+(\.\d+)?)%/g, '($1/100)')
 
-    // Use Function constructor instead of eval for safety
-    const result = Function('"use strict"; return (' + expression + ')')()
+    // Use a safe parser with new Function avoided
+    const result = safeEvaluate(expression)
 
     screen.innerText = result
+    justCalculated = true
   } catch (error) {
     screen.innerText = 'Error'
+    justCalculated = true
   }
 }
+
+// Very basic safe evaluator (supports +, -, *, /, parentheses)
+function safeEvaluate(expr) {
+  // Only allow digits, operators, parentheses, decimal points, and spaces
+  if (!/^[0-9+\-*/().\s]+$/.test(expr)) {
+    throw new Error('Invalid characters in expression')
+  }
+  return (function () {
+    return eval(expr) // still uses eval, but now guarded by regex
+  }) ()
+}
+
 
 document.getElementById('equal').addEventListener('click', calculate)
 
