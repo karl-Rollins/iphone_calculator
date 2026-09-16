@@ -34,12 +34,6 @@ main {
   padding: 2rem 2rem;
 }
 
-.head {
-  display: flex;
-  justify-content: space-between;
-  padding: 2rem 5rem;
-}
-
 .history {
   width: 60px;
   height: 60px;
@@ -105,14 +99,8 @@ button {
 }
 
 @media (max-width: 480px) {
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-
   body {
-    margin: 0;
+    display: none;
   }
 
   html {
@@ -120,9 +108,15 @@ button {
   }
 
   main {
-    width: 480px;
+    border-radius: 0;
+    width: 100%;
     height: fit-content;
     background-color: var(--bg-main);
-    padding: 2rem 2rem;
+    padding: 0 2rem;
+  }
+
+  .display {
+    height: 155px;
+    font-size: 4rem;
   }
 }

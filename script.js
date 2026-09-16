@@ -14,17 +14,21 @@ function clearScreen () {
 // Function to evaluate the expression
 function calculate () {
   try {
-    const expression = screen.innerText
+    let expression = screen.innerText
       .replace(/x/g, '*')
       .replace(/÷/g, '/')
+      // Replace percentages: "50%" → "(50/100)"
+      .replace(/(\d+(\.\d+)?)%/g, "($1/100)")
 
-    const result = eval(expression)
+    // Use Function constructor instead of eval for safety
+    const result = Function('"use strict"; return (' + expression + ')')()
 
     screen.innerText = result
   } catch (error) {
     screen.innerText = 'Error'
   }
 }
+
 
 document.getElementById('equal').addEventListener('click', calculate)
 
@@ -34,3 +38,22 @@ function deleteNumber () {
 }
 
 document.getElementById('delete').addEventListener('click', deleteNumber)
+
+// Function for plusminus
+function togglePlusMinus () {
+  if (screen.innerText) {
+    if (screen.innerText.startsWith('-')) {
+      screen.innerText = screen.innerText.slice(1)
+    } else {
+      screen.innerText = '-' + screen.innerText
+    }
+  }
+}
+
+document.getElementById('plusminus').addEventListener('click', togglePlusMinus)
+
+//display Behaviour
+
+
+//History feature
+
