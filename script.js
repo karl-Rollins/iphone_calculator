@@ -14,11 +14,11 @@ function clearScreen () {
 // Function to evaluate the expression
 function calculate () {
   try {
-    let expression = screen.innerText
+    const expression = screen.innerText
       .replace(/x/g, '*')
       .replace(/÷/g, '/')
       // Replace percentages: "50%" → "(50/100)"
-      .replace(/(\d+(\.\d+)?)%/g, "($1/100)")
+      .replace(/(\d+(\.\d+)?)%/g, '($1/100)')
 
     // Use Function constructor instead of eval for safety
     const result = Function('"use strict"; return (' + expression + ')')()
@@ -28,7 +28,6 @@ function calculate () {
     screen.innerText = 'Error'
   }
 }
-
 
 document.getElementById('equal').addEventListener('click', calculate)
 
@@ -51,9 +50,3 @@ function togglePlusMinus () {
 }
 
 document.getElementById('plusminus').addEventListener('click', togglePlusMinus)
-
-//display Behaviour
-
-
-//History feature
-
