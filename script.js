@@ -5,7 +5,7 @@ let justCalculated = false
 // Function to show the clicked number on the screen
 function appendNumber (number) {
   if (justCalculated) {
-    clearScreen ()
+    clearScreen()
     justCalculated = false
   }
   screen.innerText += number
@@ -19,9 +19,9 @@ function clearScreen () {
 }
 
 // Function to evaluate the expression without eval or Function
-function calculate() {
+function calculate () {
   try {
-    let expression = screen.innerText
+    const expression = screen.innerText
       .replace(/x/g, '*')
       .replace(/÷/g, '/')
       // Replace percentages: "50%" → "(50/100)"
@@ -38,7 +38,7 @@ function calculate() {
 }
 
 // Convert infix expression to postfix (RPN) and evaluate
-function evaluateExpression(expr) {
+function evaluateExpression (expr) {
   const outputQueue = []
   const operatorStack = []
   const operators = {
@@ -49,7 +49,7 @@ function evaluateExpression(expr) {
   }
 
   // Tokenize: numbers and operators
-  const tokens = expr.match(/(\d+(\.\d+)?|\+|\-|\*|\/|\(|\))/g)
+  const tokens = expr.match(/(\d+(\.\d+)?|\+|\-|\*|\/|)/g)
   if (!tokens) throw new Error('Invalid expression')
 
   tokens.forEach(token => {
