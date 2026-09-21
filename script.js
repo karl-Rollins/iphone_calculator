@@ -1,6 +1,9 @@
 /* eslint-disable no-unused-vars */
-const screen = document.getElementById('display-screen')
+const expressionScreen = document.getElementById('expression-screen')
+const resultScreen = document.getElementById('result-screen')
+
 let justCalculated = false
+let lastCalculation = null
 
 // Function to show the clicked number on the screen
 function appendNumber (number) {
@@ -8,31 +11,38 @@ function appendNumber (number) {
     clearScreen()
     justCalculated = false
   }
-  screen.innerText += number
+
+  expressionScreen.innerText += number
 }
 
 window.appendNumber = appendNumber
 
 // Function to clear the screen
 function clearScreen () {
-  screen.innerText = ''
+  expressionScreen.innerText = ''
+  resultScreen.innerText = ''
 }
 
+window.clearScreen = clearScreen
+
 // Function to evaluate the expression without eval or Function
-function calculate () {
+function calculate() {
   try {
-    const expression = screen.innerText
+    const originalExpression = expressionScreen.innerText
+
+    const expression = originalExpression
       .replace(/x/g, '*')
       .replace(/÷/g, '/')
-      // Replace percentages: "50%" → "(50/100)"
       .replace(/(\d+(\.\d+)?)%/g, '($1/100)')
 
     const result = evaluateExpression(expression)
 
-    screen.innerText = result
+    lastCalculation = `${expressionScreen.innerText} = ${result}`
+
+    resultScreen.innerText = result
     justCalculated = true
   } catch (error) {
-    screen.innerText = 'Error'
+    resultScreen.innerText = 'Error'
     justCalculated = true
   }
 }
@@ -105,21 +115,39 @@ function evaluateExpression (expr) {
 document.getElementById('equal').addEventListener('click', calculate)
 
 // Function to delete last value
-function deleteNumber () {
-  screen.innerText = screen.innerText.slice(0, -1)
+function deleteNumber() {
+  expressionScreen.innerText =
+    expressionScreen.innerText.slice(0, -1)
 }
 
 document.getElementById('delete').addEventListener('click', deleteNumber)
 
 // Function for plusminus
 function togglePlusMinus () {
-  if (screen.innerText) {
-    if (screen.innerText.startsWith('-')) {
-      screen.innerText = screen.innerText.slice(1)
+  if (expressionScreen.innerText) {
+    if (expressionScreen.innerText.startsWith('-')) {
+      expressionScreen.innerText = expressionScreen.innerText.slice(1)
     } else {
-      screen.innerText = '-' + screen.innerText
+      expressionScreen.innerText =
+        '-' + expressionScreen.innerText
     }
   }
 }
 
+
 document.getElementById('plusminus').addEventListener('click', togglePlusMinus)
+
+//function to get history
+const historyBtn = document.querySelector('.history')
+const historyDropdown = document.getElementById('history-dropdown')
+
+historyBtn.addEventListener('click', () => {
+  if (lastCalculation) {
+    historyDropdown.textContent = lastCalculation
+  } else {
+    historyDropdown.textContent = 'No history'
+  }
+
+  historyDropdown.classList.toggle('show')
+})
+
