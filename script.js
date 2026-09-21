@@ -26,7 +26,7 @@ function clearScreen () {
 window.clearScreen = clearScreen
 
 // Function to evaluate the expression without eval or Function
-function calculate() {
+function calculate () {
   try {
     const originalExpression = expressionScreen.innerText
 
@@ -115,7 +115,7 @@ function evaluateExpression (expr) {
 document.getElementById('equal').addEventListener('click', calculate)
 
 // Function to delete last value
-function deleteNumber() {
+function deleteNumber () {
   expressionScreen.innerText =
     expressionScreen.innerText.slice(0, -1)
 }
@@ -134,10 +134,9 @@ function togglePlusMinus () {
   }
 }
 
-
 document.getElementById('plusminus').addEventListener('click', togglePlusMinus)
 
-//function to get history
+// Function to get history
 const historyBtn = document.querySelector('.history')
 const historyDropdown = document.getElementById('history-dropdown')
 
@@ -150,4 +149,3 @@ historyBtn.addEventListener('click', () => {
 
   historyDropdown.classList.toggle('show')
 })
-
