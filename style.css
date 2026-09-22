@@ -132,24 +132,50 @@ button {
 }
 
 @media (max-width: 480px) {
-  body {
-    display: none;
+  html {
+    font-size: 50%;
   }
 
-  html {
-    font-size: 40%;
+  body {
+    display: block;
+    background-color: var(--bg-main);
   }
 
   main {
+    width: 100vw;
+    min-height: 100vh;
     border-radius: 0;
-    width: 100%;
-    height: fit-content;
-    background-color: var(--bg-main);
-    padding: 0 2rem;
   }
 
   .display {
-    height: 155px;
-    font-size: 4rem;
+    height: 25vh;
+  }
+
+  .expression-screen {
+    font-size: 3rem;
+  }
+
+  .result-screen {
+    font-size: 6rem;
+  }
+
+  .btns {
+    gap: 1rem;
+  }
+
+  button {
+    width: 100%;
+    font-size: 3rem;
+  }
+
+  .history {
+    width: 50px;
+    height: 50px;
+  }
+
+  .history-dropdown {
+    min-width: 180px;
+    left: 10px;
+    top: 70px;
   }
 }
