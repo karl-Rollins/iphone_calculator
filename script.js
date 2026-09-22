@@ -59,7 +59,9 @@ function evaluateExpression (expr) {
   }
 
   // Tokenize: numbers and operators
-  const tokens = expr.match(/(\d+(\.\d+)?|\+|\*|\/|\(|\))/g)
+  const tokens = expr.match(
+    /(\d+(\.\d+)?|\+|-|\*|\/|\(|\))/g
+  )
   if (!tokens) throw new Error('Invalid expression')
 
   tokens.forEach(token => {
