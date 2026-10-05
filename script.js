@@ -101,6 +101,11 @@ function evaluateExpression (expr) {
     } else {
       const b = stack.pop()
       const a = stack.pop()
+
+      if (a === undefined || b === undefined) {
+        throw new Error('Invalid Calculaion')
+      }
+
       switch (token) {
         case '+': stack.push(a + b); break
         case '-': stack.push(a - b); break
@@ -110,8 +115,17 @@ function evaluateExpression (expr) {
     }
   })
 
-  if (stack.length !== 1) throw new Error('Invalid calculation')
-  return stack[0]
+  if (stack.length !== 1) {
+    throw new Error('Invalid Calculation')
+  }
+
+  const result = stack[0]
+
+  if (!Number.isFinite(result)) {
+    throw new Error('Invalid Calculation')
+  }
+
+  return result
 }
 
 document.getElementById('equal').addEventListener('click', calculate)
