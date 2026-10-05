@@ -134,7 +134,7 @@ function togglePlusMinus () {
   }
 
   if (expr.startsWith('-')) {
-    expressionScreen.innerText = expr.slice(1) 
+    expressionScreen.innerText = expr.slice(1)
   } else {
     expressionScreen.innerText = '-' + expr
   }
