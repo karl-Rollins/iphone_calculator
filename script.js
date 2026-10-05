@@ -60,7 +60,7 @@ function evaluateExpression (expr) {
 
   // Tokenize: numbers and operators
   const tokens = expr.match(
-    /(\d+(\.\d+)?|\+|-|\*|\/|\(|\))/g
+    /(-?\d+(?:\.\d+)?|\+|-|\*|\/|\(|\))/g
   )
   if (!tokens) throw new Error('Invalid expression')
 
@@ -126,13 +126,17 @@ document.getElementById('delete').addEventListener('click', deleteNumber)
 
 // Function for plusminus
 function togglePlusMinus () {
-  if (expressionScreen.innerText) {
-    if (expressionScreen.innerText.startsWith('-')) {
-      expressionScreen.innerText = expressionScreen.innerText.slice(1)
-    } else {
-      expressionScreen.innerText =
-        '-' + expressionScreen.innerText
-    }
+  const expr = expressionScreen.innerText
+
+  if (!expr) {
+    expressionScreen.innerText = '-'
+    return
+  }
+
+  if (expr.startsWith('-')) {
+    expressionScreen.innerText = expr.slice(1) 
+  } else {
+    expressionScreen.innerText = '-' + expr
   }
 }
 
