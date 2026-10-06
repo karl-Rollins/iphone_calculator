@@ -146,20 +146,20 @@ function evaluateExpression (expr) {
       switch (token) {
         case '+':
           stack.push(a + b)
-        break
+          break
 
         case '-':
-         stack.push(a - b)
-        break
+          stack.push(a - b)
+          break
 
         case '*':
-         stack.push(a * b)
-        break
+          stack.push(a * b)
+          break
 
         case '/':
-         stack.push(a / b)
-        break
-     }
+          stack.push(a / b)
+          break
+      }
     }
   })
 
