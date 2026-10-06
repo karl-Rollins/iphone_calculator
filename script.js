@@ -81,16 +81,16 @@ function evaluateExpression (expr) {
 
   const tokens = []
 
-  rawTokens.forEach ((token, index) => {
-    if (token === '-' && 
-      (index === 0 || 
+  rawTokens.forEach((token, index) => {
+    if (token === '-' &&
+      (index === 0 ||
         rawTokens[index - 1] === '(' ||
         operators[rawTokens[index - 1]]
       )) {
-        tokens.push('u-')
-      } else {
-        tokens.push(token)
-      }
+      tokens.push('u-')
+    } else {
+      tokens.push(token)
+    }
   })
 
   tokens.forEach(token => {
@@ -124,45 +124,44 @@ function evaluateExpression (expr) {
 
   // Evaluate postfix expression
   const stack = []
- 
   outputQueue.forEach(token => {
-  if (typeof token === 'number') {
-    stack.push(token)
-  } else if (token === 'u-') {
-    const value = stack.pop()
+    if (typeof token === 'number') {
+      stack.push(token)
+    } else if (token === 'u-') {
+      const value = stack.pop()
 
-    if (value === undefined) {
-      throw new Error('Invalid Calculation')
+      if (value === undefined) {
+        throw new Error('Invalid Calculation')
+      }
+
+      stack.push(-value)
+    } else {
+      const b = stack.pop()
+      const a = stack.pop()
+
+      if (a === undefined || b === undefined) {
+        throw new Error('Invalid Calculation')
+      }
+
+      switch (token) {
+        case '+':
+          stack.push(a + b)
+        break
+
+        case '-':
+         stack.push(a - b)
+        break
+
+        case '*':
+         stack.push(a * b)
+        break
+
+        case '/':
+         stack.push(a / b)
+        break
+     }
     }
-
-    stack.push(-value)
-  } else {
-    const b = stack.pop()
-    const a = stack.pop()
-
-    if (a === undefined || b === undefined) {
-      throw new Error('Invalid Calculation')
-    }
-
-    switch (token) {
-      case '+':
-        stack.push(a + b)
-        break
-
-      case '-':
-        stack.push(a - b)
-        break
-
-      case '*':
-        stack.push(a * b)
-        break
-
-      case '/':
-        stack.push(a / b)
-        break
-    }
-  }
-})
+  })
 
   if (stack.length !== 1) {
     throw new Error('Invalid Calculation')
