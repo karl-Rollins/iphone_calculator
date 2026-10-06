@@ -17,6 +17,17 @@ function appendNumber (number) {
 
 window.appendNumber = appendNumber
 
+function appendOperator (operator) {
+  if (justCalculated) {
+    expressionScreen.innerText = resultScreen.innerText
+    justCalculated = false
+  }
+
+  expressionScreen.innerText += operator
+}
+
+window.appendOperator = appendOperator
+
 // Function to clear the screen
 function clearScreen () {
   expressionScreen.innerText = ''
@@ -55,14 +66,32 @@ function evaluateExpression (expr) {
     '+': { precedence: 1, assoc: 'L' },
     '-': { precedence: 1, assoc: 'L' },
     '*': { precedence: 2, assoc: 'L' },
-    '/': { precedence: 2, assoc: 'L' }
+    '/': { precedence: 2, assoc: 'L' },
+    'u-': { precedence: 3, assoc: 'R' }
   }
 
   // Tokenize: numbers and operators
-  const tokens = expr.match(
-    /(-?\d+(?:\.\d+)?|\+|-|\*|\/|\(|\))/g
+  const rawTokens = expr.match(
+    /(\d+(?:\.\d+)?|\+|-|\*|\/|\(|\))/g
   )
-  if (!tokens) throw new Error('Invalid expression')
+
+  if (!rawTokens) {
+    throw new Error('Invalid expression')
+  }
+
+  const tokens = []
+
+  rawTokens.forEach ((token, index) => {
+    if (token === '-' && 
+      (index === 0 || 
+        rawTokens[index - 1] === '(' ||
+        operators[rawTokens[index - 1]]
+      )) {
+        tokens.push('u-')
+      } else {
+        tokens.push(token)
+      }
+  })
 
   tokens.forEach(token => {
     if (!isNaN(token)) {
@@ -95,25 +124,45 @@ function evaluateExpression (expr) {
 
   // Evaluate postfix expression
   const stack = []
+ 
   outputQueue.forEach(token => {
-    if (typeof token === 'number') {
-      stack.push(token)
-    } else {
-      const b = stack.pop()
-      const a = stack.pop()
+  if (typeof token === 'number') {
+    stack.push(token)
+  } else if (token === 'u-') {
+    const value = stack.pop()
 
-      if (a === undefined || b === undefined) {
-        throw new Error('Invalid Calculaion')
-      }
-
-      switch (token) {
-        case '+': stack.push(a + b); break
-        case '-': stack.push(a - b); break
-        case '*': stack.push(a * b); break
-        case '/': stack.push(a / b); break
-      }
+    if (value === undefined) {
+      throw new Error('Invalid Calculation')
     }
-  })
+
+    stack.push(-value)
+  } else {
+    const b = stack.pop()
+    const a = stack.pop()
+
+    if (a === undefined || b === undefined) {
+      throw new Error('Invalid Calculation')
+    }
+
+    switch (token) {
+      case '+':
+        stack.push(a + b)
+        break
+
+      case '-':
+        stack.push(a - b)
+        break
+
+      case '*':
+        stack.push(a * b)
+        break
+
+      case '/':
+        stack.push(a / b)
+        break
+    }
+  }
+})
 
   if (stack.length !== 1) {
     throw new Error('Invalid Calculation')
