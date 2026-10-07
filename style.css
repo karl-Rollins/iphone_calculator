@@ -136,8 +136,16 @@ main {
   justify-content: center;
 }
 
-button {
+button:not(#zero) {
   aspect-ratio: 1 / 1;
+}
+
+#zero {
+  grid-column: span 2;
+  border-radius: 999px;
+  aspect-ratio: auto;
+  justify-content: flex-start;
+  padding-left: 3rem;
 }
 
 @media (max-width: 480px) {
