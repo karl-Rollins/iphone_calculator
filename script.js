@@ -3,7 +3,7 @@ const expressionScreen = document.getElementById('expression-screen')
 const resultScreen = document.getElementById('result-screen')
 
 let justCalculated = false
-let lastCalculation = null
+const history = []
 
 // Function to show the clicked number on the screen
 function appendNumber (number) {
@@ -42,14 +42,22 @@ function calculate () {
   try {
     const originalExpression = expressionScreen.innerText
 
+    // const expression = originalExpression
+    //   .replace(/x/g, '*')
+    //   .replace(/(\d+(\.\d+)?)%/g, '($1/100)')
+
     const expression = originalExpression
-      .replace(/x/g, '*')
-      .replace(/÷/g, '/')
-      .replace(/(\d+(\.\d+)?)%/g, '($1/100)')
+         .replace(/x/g, '*')
+         .replace(
+           /(\d+(?:\.\d+)?)([+-])(\d+(?:\.\d+)?)%/g,
+           (_, base, op, percent) =>
+             `${base}${op}(${base}*${percent}/100)`
+          )
+          .replace(/(\d+(?:\.\d+)?)%/g, '($1/100)')
 
     const result = evaluateExpression(expression)
 
-    lastCalculation = `${expressionScreen.innerText} = ${result}`
+    history.unshift(`${expressionScreen.innerText} = ${result}`)
 
     resultScreen.innerText = result
     justCalculated = true
@@ -216,8 +224,14 @@ const historyBtn = document.querySelector('.history')
 const historyDropdown = document.getElementById('history-dropdown')
 
 historyBtn.addEventListener('click', () => {
-  if (lastCalculation) {
-    historyDropdown.textContent = lastCalculation
+  if (history.length > 10) {
+    history.pop()
+  }
+
+  if (history.length) {
+    historyDropdown.innerHTML = history
+      .map(item => `<div>${item}</div>`)
+      .join('')
   } else {
     historyDropdown.textContent = 'No history'
   }
