@@ -32,6 +32,7 @@ window.appendOperator = appendOperator
 function clearScreen () {
   expressionScreen.innerText = ''
   resultScreen.innerText = ''
+  justCalculated = false
 }
 
 window.clearScreen = clearScreen
@@ -179,15 +180,21 @@ function evaluateExpression (expr) {
 document.getElementById('equal').addEventListener('click', calculate)
 
 // Function to delete last value
-function deleteNumber () {
-  expressionScreen.innerText =
-    expressionScreen.innerText.slice(0, -1)
-}
+// function deleteNumber () {
+//   expressionScreen.innerText =
+//     expressionScreen.innerText.slice(0, -1)
+// }
 
-document.getElementById('delete').addEventListener('click', deleteNumber)
+// document.getElementById('delete').addEventListener('click', deleteNumber)
 
 // Function for plusminus
 function togglePlusMinus () {
+  if (justCalculated) {
+    expressionScreen.innerText = resultScreen.innerText
+    resultScreen.innerText = ''
+    justCalculated = false
+  }
+
   const expr = expressionScreen.innerText
 
   if (!expr) {
