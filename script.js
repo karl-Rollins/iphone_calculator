@@ -47,13 +47,13 @@ function calculate () {
     //   .replace(/(\d+(\.\d+)?)%/g, '($1/100)')
 
     const expression = originalExpression
-         .replace(/x/g, '*')
-         .replace(
-           /(\d+(?:\.\d+)?)([+-])(\d+(?:\.\d+)?)%/g,
-           (_, base, op, percent) =>
+      .replace(/x/g, '*')
+      .replace(
+        /(\d+(?:\.\d+)?)([+-])(\d+(?:\.\d+)?)%/g,
+        (_, base, op, percent) =>
              `${base}${op}(${base}*${percent}/100)`
-          )
-          .replace(/(\d+(?:\.\d+)?)%/g, '($1/100)')
+      )
+      .replace(/(\d+(?:\.\d+)?)%/g, '($1/100)')
 
     const result = evaluateExpression(expression)
 
