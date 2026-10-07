@@ -138,10 +138,6 @@ main {
   justify-content: center;
 }
 
-button:not(#zero) {
-  aspect-ratio: 1 / 1;
-}
-
 button {
   cursor: pointer;
   transition:
@@ -160,6 +156,10 @@ button:active {
 button:focus-visible {
   outline: 2px solid white;
   outline-offset: 2px;
+}
+
+button:not(#zero) {
+  aspect-ratio: 1 / 1;
 }
 
 #zero {
